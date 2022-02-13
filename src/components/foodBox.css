@@ -1,0 +1,42 @@
+.foodBox {
+  display: flex;
+  margin-bottom: 10px;
+  border: 1px solid grey;
+  height: 100px;
+  width: 600px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.foodBox > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}
+
+.foodBox > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.btnXqnty{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.foodBox button {
+  width: 100px;
+  height: 105px;
+  border: none;
+  background-color: rgb(97, 174, 255);
+  color: white;
+  font-size: 25px;
+}
+
+.foodBox button:hover {
+  background-color: rgb(30, 139, 255);
+}
