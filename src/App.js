@@ -10,54 +10,70 @@ function App() {
   const [allFood, setAllFood] = useState(foods);
 
   // show Form
-  const [formShow, setFormShow] = useState(false)
+  const [formShow, setFormShow] = useState(false);
   const handleFormVisible = () => {
-    setFormShow(true)
-  }
+    setFormShow((formShow) => !formShow);
+  };
 
   // form Input
-  const handleAdd = form => {
-    setAllFood(prev => {
+  const handleAdd = (form) => {
+    setAllFood((prev) => {
       return [
         ...prev,
         {
           name: form.name,
           calories: form.calories,
           image: form.image,
-        }
-      ]
-    })
-    setFormShow(false)
-  }
+        },
+      ];
+    });
+    setFormShow(false);
+  };
 
   //Search
   const foodSearch = (input) => {
-    if (input.name === '') {
+    if (input === '') {
       setAllFood(foods);
+    } else {
+      setAllFood(
+        foods.filter((item) =>
+          item.name.toLowerCase().includes(input.toLowerCase())
+        )
+      );
     }
-    setAllFood((prev) => [
-      ...prev.filter((food) =>
-        food.name.toLowerCase().includes(input.name.toLowerCase())
-      ),
-    ]);
   };
+
+  // Today's food
+
+/*   const [today, setToday] = useState({})
+  const todayFood = () => {
+
+  }; */
 
   return (
     <div className="App">
-    <Search onSearch={foodSearch}/>
+      <Search onSearch={foodSearch} />
       <button onClick={handleFormVisible}> Add Food</button>
-        { formShow ? <AddFoodForm onAdd={handleAdd} /> : null}
-      {allFood.map((food, i) => {
-        return (
-          <FoodBox
-            key={i}
-            name={food.name}
-            calories={food.calories}
-            image={food.image}
-            quantity={food.quantity}
-          />
-        );
-      })}
+      {formShow ? <AddFoodForm onAdd={handleAdd} /> : null}
+      <div class="content">
+        <div>
+          {allFood.map((food, i) => {
+            return (
+              <FoodBox
+                key={i}
+                name={food.name}
+                calories={food.calories}
+                image={food.image}
+                quantity={food.quantity}
+              />
+            );
+          })}
+        </div>
+        <div>
+          <h1>Today's foods</h1>
+
+        </div>
+      </div>
     </div>
   );
 }

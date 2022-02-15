@@ -4,9 +4,11 @@ function AddFoodForm({ onAdd }) {
     name: '',
     calories: 0,
     image: '',
+    quantity: 0,
   });
 
   const handleForm = (e) => {
+    e.persist();
     setForm((prev) => {
       return {
         ...prev,
