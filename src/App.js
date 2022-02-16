@@ -4,7 +4,8 @@ import FoodBox from './components/FoodBox';
 import foods from './foods.json';
 import AddFoodForm from './components/AddFoodForm';
 import Search from './components/Search';
-
+import TodayFood from './components/TodayFood';
+ 
 function App() {
   //all foods in db
   const [allFood, setAllFood] = useState(foods);
@@ -36,7 +37,7 @@ function App() {
       setAllFood(foods);
     } else {
       setAllFood(
-        foods.filter((item) =>
+        allFood.filter((item) =>
           item.name.toLowerCase().includes(input.toLowerCase())
         )
       );
@@ -44,11 +45,22 @@ function App() {
   };
 
   // Today's food
+  const [foodToday, setFoodToday] = useState([])
 
-/*   const [today, setToday] = useState({})
-  const todayFood = () => {
+  const todayFood = (handleCal) => {
+    setFoodToday(prev => {
+      return [
+        ...prev,
+        handleCal,
+      ]
+    })
+  };
 
-  }; */
+  const [totalCal, setTotal] = useState(0);
+
+  const handleTotal = (total) => {
+    setTotal(total)
+  }
 
   return (
     <div className="App">
@@ -64,14 +76,25 @@ function App() {
                 name={food.name}
                 calories={food.calories}
                 image={food.image}
-                quantity={food.quantity}
+                todayFood={todayFood}
               />
             );
           })}
         </div>
         <div>
           <h1>Today's foods</h1>
-
+          {foodToday.map((plate, i)=> {
+            return (
+              <TodayFood
+                key={i}
+                name={plate.name}
+                calories={plate.calories}
+                quantity={plate.quantity}
+                total={handleTotal}
+              />
+            );
+          })}
+          <h2>Total: {totalCal} cal</h2>
         </div>
       </div>
     </div>

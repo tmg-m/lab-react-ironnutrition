@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './foodBox.css'
 
 function FoodBox({ name, calories, image, todayFood }) {
 
+  const [quantity, setQty] = useState(0);
+
+
   const handleCal = () => {
-    todayFood(name, calories)
+    todayFood({name, calories, quantity})
+    setQty(0)
+  };
+
+  const handleQuantity = (e)=> {
+    const value = e.target.value;
+    setQty(Number(value))
   };
 
   return (
@@ -18,7 +27,7 @@ function FoodBox({ name, calories, image, todayFood }) {
       </div>
 
       <div className="btnXqnty">
-        <input className="quantity" type='number' placeholder='0' min={0} max={10000}/>
+        <input className="quantity" type='number' placeholder='0' value={quantity} onChange={handleQuantity} min={0} max={10000}/>
         <button onClick={handleCal}>+</button>
       </div>
     </div>
