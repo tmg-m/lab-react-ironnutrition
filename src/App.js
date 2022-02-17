@@ -57,8 +57,8 @@ function App() {
   };
 
   const [totalCal, setTotal] = useState(0);
-
   const handleTotal = (total) => {
+    /* setTotal(totalCal + total) */  // ale no consigo guardar  en totalCal
     setTotal(total)
   }
 
