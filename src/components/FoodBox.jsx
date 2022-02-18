@@ -7,7 +7,7 @@ function FoodBox({ name, calories, image, todayFood }) {
 
 
   const handleCal = () => {
-    todayFood({name, calories, quantity})
+    todayFood({name, calories, quantity: quantity})
     setQty(0)
   };
 

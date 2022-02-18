@@ -1,13 +1,10 @@
 import React from 'react';
-function TodayFood({ name, calories, quantity, total }) {
-	const calc = calories * quantity
-
-	total(calc)
+function TodayFood({ name, calories, quantity }) {
 
   return <div>
 		<ul>
 			<li>
-				<p>{quantity} {name} = {calc} cal</p>
+				<p>{quantity} {name} = {calories * quantity} cal</p>
 			</li>
 		</ul>
 	</div>;

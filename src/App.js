@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import FoodBox from './components/FoodBox';
 import foods from './foods.json';
@@ -57,14 +57,15 @@ function App() {
   };
 
   const [totalCal, setTotal] = useState(0);
-  const handleTotal = (total) => {
-    /* setTotal(totalCal + total) */ // ale no consigo guardar la suma en el estado totalCal,
-                                    // cuando tengo la suma me peta el app  nose
-                                    // el console.log de cada que quiero sumar si que lo da.
-    console.log(total);
-    console.log(totalCal);
-    setTotal(total + totalCal);
+  const handleTotal = () => {
+    let sum = 0;
+    foodToday.forEach(food => sum = sum + (food.calories*food.quantity));
+    setTotal(sum)
   }
+
+  useEffect(() => {
+    handleTotal()
+  }, [foodToday])
 
   return (
     <div className="App">
@@ -94,7 +95,6 @@ function App() {
                 name={plate.name}
                 calories={plate.calories}
                 quantity={plate.quantity}
-                total={handleTotal}
               />
             );
           })}
